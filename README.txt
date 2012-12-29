@@ -25,6 +25,23 @@ WebSockets Server (Python) library and Client (HTML) - version 1.0 - 2012
 
 Version supported : 13 (RFC 6465 - http://tools.ietf.org/html/rfc6455)
 
+SCHEME:
+
+  WSMain (Startup)   incoming datas
+    |                       |
+    v                       v
+WSServer (listen) => WSClient (thread) -> WSDecoder (one per WSClient)
+    ^                       ^                  |
+    |                       |                  |
+    |                       |                  |
+    |                       |                  v
+    |                       |        	 WSController (one per WSClient)
+    |                    unicast               |
+    |                       |                  |
+    |                       |                  |
+    |                       |                  v
+    |-------multicast-------|------------- WSEncoder
+
 Remember : FIREFOX NEEDED !
 
 HOWTO
@@ -39,7 +56,7 @@ HOWTO
 - Rename the index.html file if needed
 - Place the file to your favorite webserver (Apache or other)
 - Open Firefox
-- Point to the file - if all if good, you should read a "CONNECTED" message on screen
+- Point to the file - if all right, you should read a "CONNECTED" message
 
 Settings
 --------
